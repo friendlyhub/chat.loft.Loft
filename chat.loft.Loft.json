@@ -1,0 +1,56 @@
+{
+  "build-options": {
+    "append-path": "/usr/lib/sdk/rust-stable/bin",
+    "env": {
+      "CARGO_HOME": "/run/build/loft/cargo",
+      "CARGO_REGISTRIES_CRATES_IO_PROTOCOL": "sparse"
+    }
+  },
+  "command": "loft",
+  "finish-args": [
+    "--share=ipc",
+    "--socket=fallback-x11",
+    "--socket=wayland",
+    "--device=dri",
+    "--share=network",
+    "--socket=pulseaudio",
+    "--talk-name=org.kde.StatusNotifierWatcher",
+    "--talk-name=org.freedesktop.Notifications",
+    "--own-name=chat.loft.*",
+    "--talk-name=org.freedesktop.Flatpak",
+    "--filesystem=home"
+  ],
+  "id": "chat.loft.Loft",
+  "modules": [
+    {
+      "build-commands": [
+        "cargo --offline fetch --manifest-path Cargo.toml --verbose",
+        "cargo --offline build --release --verbose",
+        "install -Dm755 target/release/loft /app/bin/loft",
+        "install -Dm644 data/chat.loft.Loft.desktop /app/share/applications/chat.loft.Loft.desktop",
+        "install -Dm644 data/chat.loft.Loft.metainfo.xml /app/share/metainfo/chat.loft.Loft.metainfo.xml",
+        "install -Dm644 assets/icons/loft.svg /app/share/icons/hicolor/scalable/apps/chat.loft.Loft.svg"
+      ],
+      "buildsystem": "simple",
+      "name": "loft",
+      "sources": [
+        {
+          "commit": "6bb2fb74476c80ea6e888470890eb6c7beeb9964",
+          "type": "git",
+          "url": "https://github.com/keithvassallomt/loft.git"
+        },
+        "cargo-sources.json",
+        {
+          "path": "chat.loft.Loft.metainfo.xml",
+          "type": "file"
+        }
+      ]
+    }
+  ],
+  "runtime": "org.gnome.Platform",
+  "runtime-version": "50",
+  "sdk": "org.gnome.Sdk",
+  "sdk-extensions": [
+    "org.freedesktop.Sdk.Extension.rust-stable"
+  ]
+}

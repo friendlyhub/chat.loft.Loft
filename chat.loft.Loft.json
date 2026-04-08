@@ -18,6 +18,7 @@
     "--talk-name=org.freedesktop.Notifications",
     "--own-name=chat.loft.*",
     "--talk-name=org.freedesktop.Flatpak",
+    "--talk-name=org.freedesktop.portal.Desktop",
     "--filesystem=home"
   ],
   "id": "chat.loft.Loft",
@@ -35,7 +36,7 @@
       "name": "loft",
       "sources": [
         {
-          "commit": "6bb2fb74476c80ea6e888470890eb6c7beeb9964",
+          "commit": "9b29a9f64f30f23c00595122f885ccbe730a5516",
           "type": "git",
           "url": "https://github.com/keithvassallomt/loft.git"
         },

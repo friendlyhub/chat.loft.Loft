@@ -37,7 +37,7 @@
       "name": "loft",
       "sources": [
         {
-          "commit": "7dfb0d18f0ed4aed7b535038cde7703cddb7cecb",
+          "commit": "6015466da55788434fbb231ecda43ce9b8c4d04e",
           "type": "git",
           "url": "https://github.com/keithvassallomt/loft.git"
         },

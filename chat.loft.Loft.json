@@ -1,9 +1,10 @@
 {
+  "base": "org.electronjs.Electron2.BaseApp",
+  "base-version": "24.08",
   "build-options": {
-    "append-path": "/usr/lib/sdk/rust-stable/bin",
+    "append-path": "/usr/lib/sdk/node22/bin",
     "env": {
-      "CARGO_HOME": "/run/build/loft/cargo",
-      "CARGO_REGISTRIES_CRATES_IO_PROTOCOL": "sparse"
+      "npm_config_nodedir": "/usr/lib/sdk/node22"
     }
   },
   "command": "loft",
@@ -11,38 +12,56 @@
     "--share=ipc",
     "--socket=fallback-x11",
     "--socket=wayland",
-    "--device=dri",
+    "--socket=pulseaudio",
+    "--device=all",
     "--share=network",
     "--talk-name=org.kde.StatusNotifierWatcher",
     "--talk-name=org.kde.KWin",
     "--talk-name=org.freedesktop.Notifications",
-    "--own-name=chat.loft.*",
-    "--talk-name=org.freedesktop.Flatpak",
+    "--talk-name=org.gnome.Shell.Extensions",
     "--talk-name=org.freedesktop.portal.Desktop",
-    "--talk-name=org.gnome.SessionManager",
-    "--filesystem=home"
+    "--own-name=chat.loft.*",
+    "--filesystem=xdg-config/autostart:create",
+    "--filesystem=xdg-data/applications:create"
   ],
   "id": "chat.loft.Loft",
   "modules": [
     {
       "build-commands": [
-        "cargo --offline fetch --manifest-path Cargo.toml --verbose",
-        "cargo --offline build --release --verbose",
-        "install -Dm755 target/release/loft /app/bin/loft",
+        "npm ci --offline",
+        "node node_modules/electron/install.js",
+        "npm run build",
+        "mkdir -p /app/main",
+        "cp -r dist package.json node_modules /app/main/",
+        "install -Dm755 flatpak/loft-launcher.sh /app/bin/loft",
         "install -Dm644 data/chat.loft.Loft.desktop /app/share/applications/chat.loft.Loft.desktop",
         "install -Dm644 data/chat.loft.Loft.metainfo.xml /app/share/metainfo/chat.loft.Loft.metainfo.xml",
-        "install -Dm644 assets/icons/loft.svg /app/share/icons/hicolor/scalable/apps/chat.loft.Loft.svg"
+        "install -Dm644 build/icon.png /app/share/icons/hicolor/512x512/apps/chat.loft.Loft.png"
       ],
+      "build-options": {
+        "env": {
+          "XDG_CACHE_HOME": "/run/build/loft/flatpak-node/cache",
+          "npm_config_cache": "/run/build/loft/flatpak-node/npm-cache",
+          "npm_config_offline": "true"
+        }
+      },
       "buildsystem": "simple",
       "name": "loft",
       "sources": [
         {
-          "commit": "350e0170783b59d8e29764d6c49ff22cffff9cb3",
-          "tag": "v0.2.0",
-          "type": "git",
-          "url": "https://github.com/keithvassallomt/loft.git"
+          "path": ".",
+          "skip": [
+            ".git",
+            "build-dir",
+            ".flatpak-repo",
+            "target",
+            "node_modules",
+            "dist",
+            "dist-electron"
+          ],
+          "type": "dir"
         },
-        "cargo-sources.json",
+        "generated-sources.json",
         {
           "path": "chat.loft.Loft.metainfo.xml",
           "type": "file"
@@ -50,10 +69,10 @@
       ]
     }
   ],
-  "runtime": "org.gnome.Platform",
-  "runtime-version": "50",
-  "sdk": "org.gnome.Sdk",
+  "runtime": "org.freedesktop.Platform",
+  "runtime-version": "24.08",
+  "sdk": "org.freedesktop.Sdk",
   "sdk-extensions": [
-    "org.freedesktop.Sdk.Extension.rust-stable"
+    "org.freedesktop.Sdk.Extension.node22"
   ]
 }

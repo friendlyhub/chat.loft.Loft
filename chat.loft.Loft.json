@@ -1,6 +1,6 @@
 {
   "base": "org.electronjs.Electron2.BaseApp",
-  "base-version": "24.08",
+  "base-version": "25.08",
   "build-options": {
     "append-path": "/usr/lib/sdk/node22/bin",
     "env": {
@@ -19,8 +19,7 @@
     "--talk-name=org.kde.KWin",
     "--talk-name=org.freedesktop.Notifications",
     "--talk-name=org.gnome.Shell.Extensions",
-    "--talk-name=org.freedesktop.portal.Desktop",
-    "--own-name=chat.loft.*",
+    "--talk-name=chat.loft.ShellHelper",
     "--filesystem=xdg-config/autostart:create",
     "--filesystem=xdg-data/applications:create"
   ],
@@ -49,7 +48,7 @@
       "name": "loft",
       "sources": [
         {
-          "tag": "v1.0.0",
+          "tag": "v1.0.1",
           "type": "git",
           "url": "https://github.com/keithvassallomt/loft.git"
         },
@@ -62,7 +61,7 @@
     }
   ],
   "runtime": "org.freedesktop.Platform",
-  "runtime-version": "24.08",
+  "runtime-version": "25.08",
   "sdk": "org.freedesktop.Sdk",
   "sdk-extensions": [
     "org.freedesktop.Sdk.Extension.node22"

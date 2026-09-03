@@ -48,7 +48,7 @@
       "name": "loft",
       "sources": [
         {
-          "tag": "v1.0.2",
+          "tag": "v1.0.3",
           "type": "git",
           "url": "https://github.com/keithvassallomt/loft.git"
         },

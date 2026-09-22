@@ -82,6 +82,17 @@
   </screenshots>
 
   <releases>
+    <release version="1.0.6" date="2026-09-22">
+      <description>
+        <p>
+          Do Not Disturb now silences everything it is meant to, and shows itself more clearly in the rail.
+        </p>
+        <ul>
+          <li>Element no longer plays its message sound while Do Not Disturb is on.</li>
+          <li>The Do Not Disturb mark on a service icon is now a bell with a line through it, and is no longer half covered.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.5" date="2026-09-09">
       <description>
         <p>

@@ -82,14 +82,26 @@
   </screenshots>
 
   <releases>
+    <release version="1.0.7" date="2026-11-16">
+      <description>
+        <p>
+          Files dragged in from the desktop now arrive intact, Slack's badge stays put on every tab, and your own drafts no longer come back to you as notifications.
+        </p>
+        <ul>
+          <li>Dragging a file into a chat now works in the Flatpak. Slack used to call every dropped file "a type of file not supported". Loft's sandbox has no access to folders like Downloads, so a dropped file has to be handed over through the desktop's file-transfer portal, the way the attach button already does through the file chooser. The browser engine inside Loft received that hand-over and then ignored it, passing the web app a path it could not read. Loft now turns the hand-over on, so dropped files arrive readable without widening the sandbox.</li>
+          <li>Slack's unread badge no longer disappears while you are on its DMs or Activity tab. Loft counted the unread rows in Slack's Home sidebar, but Slack only draws the sidebar of the tab you are looking at, so on any other tab the badge read zero with unread messages waiting. Loft now takes the count Slack itself shows in its window title, which is there whichever tab is open.</li>
+          <li>Messenger and Telegram no longer notify you about your own half-typed replies. Both apps sync a reply you started typing to your other devices, and Loft on another computer took the changed preview for a new message. In Telegram it even looked as if the other person had written it. Your own text no longer triggers a notification, and clearing a draft does not repeat the notification for the message underneath it.</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.6" date="2026-09-22">
       <description>
         <p>
           Do Not Disturb now silences everything it is meant to, and shows itself more clearly in the rail.
         </p>
         <ul>
-          <li>Element no longer plays its message sound while Do Not Disturb is on.</li>
-          <li>The Do Not Disturb mark on a service icon is now a bell with a line through it, and is no longer half covered.</li>
+          <li>Element no longer plays its message sound while Do Not Disturb is on. Loft silences the sound a web app plays itself in the same breath as holding back the notification, but it only covered the usual way a page makes a sound. Element takes a different route, so its sound slipped past: the notification was correctly held back while the ding still fired on every message. Both routes are now covered, for every service. Ringtones, and anything you started yourself such as a voice message, are left alone as before.</li>
+          <li>The Do Not Disturb mark on a service icon is now a bell with a line through it, and is no longer half covered. It was a moon, which your system's emoji font drew as a small yellow blob tucked under the bottom corner of the icon, where the next icon down the rail painted over part of it. It now sits clear in the top corner. The mark on a service opened in its own window was being clipped the same way, and is fixed too.</li>
         </ul>
       </description>
     </release>
